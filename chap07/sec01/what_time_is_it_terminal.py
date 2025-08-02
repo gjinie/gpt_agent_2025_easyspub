@@ -1,4 +1,4 @@
-from gpt_functions import get_current_time, tools 
+from gpt_functions import get_current_time, tools  #gpt_funtions 파일의 get_current_time함수와 tools 임포트
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
@@ -32,11 +32,11 @@ while True:
     messages.append({"role": "user", "content": user_input})  # 사용자 메시지 대화 기록에 추가
     
     ai_response = get_ai_response(messages, tools=tools)
-    ai_message = ai_response.choices[0].message
+    ai_message = ai_response.choices[0].message #객체 형태로 반환
     print(ai_message)  # ③ gpt에서 반환되는 값을 파악하기 위해 임시로 추가
 
     tool_calls = ai_message.tool_calls  # AI 응답에 포함된 tool_calls를 가져옵니다.
-    if tool_calls:  # tool_calls가 있는 경우
+    if tool_calls:  # tool_calls가 있는 경우 (만약 gpt가 특정 함수를 실행해야 한다고 판단하면, ai_message의 tool_calls라는 속성에 실행할 함수 정보가 포함됨)
         for tool_call in tool_calls:
             tool_name = tool_call.function.name # 실행해야한다고 판단한 함수명 받기
             tool_call_id = tool_call.id         # tool_call 아이디 받기    
@@ -50,6 +50,8 @@ while True:
                     "content": get_current_time(timezone=arguments['timezone']),  # 타임존 추가
                 })
         messages.append({"role": "system", "content": "이제 주어진 결과를 바탕으로 답변할 차례다."})  # 함수 실행 완료 메시지 추가
+        #gpt가 불필요하게 함수 호출을 반복하는 실수를 하기도 하므로 시스템 프롬프트를 활용해 이런 실수를 하지 않도록 가이드를 줌.
+        #(for문이 종료되고 나면 함수 사용을 멈추고 답변을 생성하라는 의미의 시스템 프롬프트를 메시지에 추가)
         ai_response = get_ai_response(messages, tools=tools) # 다시 GPT 응답 받기
         ai_message = ai_response.choices[0].message
 

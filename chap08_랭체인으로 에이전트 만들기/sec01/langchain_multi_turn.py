@@ -1,3 +1,6 @@
+#랭체인으로 멀티턴 대화하기
+
+
 # from openai import OpenAI  # 주석처리
 # from dotenv import load_dotenv
 # import os
@@ -9,7 +12,7 @@ from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 # api_key = os.getenv("OPENAI_API_KEY")  # 환경 변수에서 API 키 가져오기
 # client = OpenAI(api_key=api_key)  # 오픈AI 클라이언트의 인스턴스 생성
 
-llm = ChatOpenAI(model="gpt-4o")  # ChatOpenAI 클래스의 인스턴스 생성
+llm = ChatOpenAI(model="gpt-4o")  # ChatOpenAI 클래스의 인스턴스 생성 (랭체인에서 사용할 모델 정의 )
 
 
 # def get_ai_response(messages):

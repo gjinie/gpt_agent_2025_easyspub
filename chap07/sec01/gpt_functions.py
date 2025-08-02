@@ -1,6 +1,6 @@
 from datetime import datetime
 import pytz
-
+#####w주석...
 def get_current_time(timezone: str = 'Asia/Seoul'):
     tz = pytz.timezone(timezone) # 타임존 설정
     now = datetime.now(tz).strftime("%Y-%m-%d %H:%M:%S")

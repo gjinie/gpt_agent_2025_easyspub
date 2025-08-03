@@ -9,7 +9,7 @@ llm = ChatOllama(model="deepseek-r1:14b")
 # Load Chroma store
 from langchain_chroma import Chroma
 print("Loading existing Chroma store")
-persist_directory = 'C:/github/gpt_agent_2025_easyspub/chap09/chroma_store'
+persist_directory = 'C:/github/gpt_agent_2025_easyspub/chap09_RAG로 문서에 기반해 답변하는 챗봇 만들기/chroma_store'
 
 vectorstore = Chroma(
     persist_directory=persist_directory, 
